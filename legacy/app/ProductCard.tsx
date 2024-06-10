@@ -185,13 +185,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   const addRatings = async (rate: number) => {
     const productId: number = product.id;
+    console.log(rate,"ratee");
+    
+    console.log("rate",(product.rating * product.numOfRating + rate) /
+    (product.numOfRating+ 1),);
+    
     if (user) {
       try {
         await axios
           .put(`http://localhost:5000/Client/rati/${productId}`, {
             rating:
-              (product.rating * product.numOfRating + newRate) /
-              (numOfRate + 1),
+              (product.rating * product.numOfRating + rate) /
+              (product.numOfRating + 1),
           })
           .then(() => {
             setUpdate ? setUpdate(!update) : null;
@@ -276,17 +281,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
         <Rating
           name="simple-controlled"
-          defaultValue={product.rating}
           precision={0.5}
+          defaultValue={product.rating}
           max={5}
-          value={newRate}
+          // value={newRate}
           onClick={(e) => {
             e.stopPropagation();
-            const value = (e.target as HTMLInputElement).value;
-            if (value) setNewRate(parseInt(value));
-            if (newRate !== 0) {
+            const value = parseFloat((e.target as HTMLInputElement).value);
+            
+            console.log(value);
+            
+            if (value) setNewRate((value));
+            if (value ) {
               setNumOfRate(numOfRate + 1);
-              addRatings(newRate);
+              addRatings(value);
               // console.log('target value', parseInt(newRate));
               console.log(
                 'numOfRate',

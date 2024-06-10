@@ -33,10 +33,10 @@ const UserProfile: React.FC = () => {
   const [role, setRole] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedRole = localStorage.getItem('role');
-    if (storedRole) {
-      setRole(JSON.parse(storedRole));
-    }
+    // const storedRole = localStorage.getItem('role');
+    // if (storedRole) {
+    //   setRole(JSON.parse(storedRole));
+    // }
     const token = localStorage.getItem('token');
     if (token) {
       const decoded: any = jwtDecode(token);
