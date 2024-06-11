@@ -4,7 +4,7 @@ const Product = require('../database/Product');
 const User = require('../database/User');
 const Order = require('../database/Order');
 const { logIn, signUp } = require('../database/Auth');
-const { protect ,checkAdminRole} = require('../MiddleWares/MiddleWares');
+const { checkAdminRole} = require('../MiddleWares/MiddleWares');
 
 router.get('/products',Product.getAllproducts);
 router.post('/products/add',Product.addProduct)
@@ -14,7 +14,10 @@ router.put('/products/:productId', Product.modifyProduct);
 router.delete('/products/:productId',Product.removeProduct)
 
 //JWT token
+router.get('/dashboard', checkAdminRole, (req, res) => {
+  res.send('This is an admin-only route');
 
+});
 router.get('/orders', Order.getAllorders);
 router.get('/orders/:orderId', Order.getOrder);
 router.put('/orders/:orderId', Order.markOrder);

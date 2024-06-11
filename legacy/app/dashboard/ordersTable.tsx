@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from '@mui/material';
+import { Typography, Table, TableBody, TableCell, TableContainer, TableHead,Paper, TableRow, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 interface Order {
   id: number;
@@ -12,7 +12,13 @@ interface Order {
   totalAmount: number;
   status: string;
 }
-
+const styles = {
+  
+  paper: {
+    padding: '20px',
+    borderRadius: '8px',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+  },}
 const OrdersTable: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const router=useRouter()
@@ -40,9 +46,7 @@ const OrdersTable: React.FC = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <Typography variant="h3" gutterBottom style={{ color: 'red' }}>
-        Orders
-      </Typography>
+<Paper style={styles.paper}>
       <TableContainer>
         <Table>
           <TableHead style={{ backgroundColor: 'black' }}>
@@ -90,6 +94,7 @@ const OrdersTable: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      </Paper>
     </div>
   );
 };

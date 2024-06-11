@@ -6,9 +6,26 @@ import Services from "../Services";
 
 export default function About(){
  return (
-   <div className="App">
+   <div className="App" style={{backgroundColor:'darkred'}}>
      <Navbar/>
-     <Box sx={{ width: "90%", margin: "0 auto", mt: 4 }}>
+     <div style={{backgroundColor:'darkred',paddingBottom:'1%',paddingTop:'5%'}}>
+     <Box
+              sx={{
+                 width: "90%",
+                  margin: "0 auto" ,
+                  marginBottom:"50px",
+                boxShadow: 3,
+                p: 2,
+                bgcolor: "background.paper",
+                minHeight: "500px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                float:"center"
+              }}
+            >
+     <Box sx={{ width: "80%", margin: "0 auto", mt: 4 }}>
        <Grid container spacing={4} alignItems="center">
          <Grid item xs={12} md={6}>
            <Typography variant="h3" gutterBottom>Our Story</Typography>
@@ -34,10 +51,12 @@ export default function About(){
          </Grid>
        </Grid>
      </Box>
-     
+    
      
 
      <Services />
+     </Box>
+     </div>
    </div>
  );
 }

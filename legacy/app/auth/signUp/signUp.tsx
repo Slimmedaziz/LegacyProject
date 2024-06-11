@@ -61,6 +61,8 @@ const Signup: React.FC = () => {
   return (
     <div>
       <Navbar />
+    <div style={{backgroundColor:'darkred',paddingBottom:'6%',paddingTop:'4%'}}>
+      
       <Box mt={4}>
         <Grid container justifyContent="center">
           <Grid item xs={12} md={9}>
@@ -78,6 +80,9 @@ const Signup: React.FC = () => {
             >
               <Grid container spacing={4} alignItems="center">
                 <Grid item xs={12} md={6}>
+                   <Typography variant="h5" gutterBottom>
+                        Membership Application
+                      </Typography>
                   <img
                     src="https://s3-alpha-sig.figma.com/img/75f3/94c0/a1c7dc5b68a42239311e510f54d8cd59?Expires=1717977600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nxMmcLhDtU4rZjNqF~3dko2JRdwdfpOvZKhGTpTt1aHOlqVteTtrRlBp3HeK~hYWrTe7a8rpwm7LFLhnHGTGVc~NcfXoWkEMV1ibyMuNzL92tUIQ-O4H9fbZ1FRiyJEYfAotxkSleK15Z~REekYxnCE5yYmsDBfRLkgOFYUHOqm1veciY3mvSruMfp0d8ivEFPyP58797yqnYeAnlVR4kYi0F588gMvxhjpUcKk8FHRAorAPnnBhQKe2SEs9UkKmJyQ6PEEAPc04~Zfh9plGg9K6WtZ2rwjU70Y6VhuG~HnaAqlnJ5n2fj5kw0D6zVDiTA-oEDeLoj4uPhVPNb51-A__"
                     alt="Signup"
@@ -87,9 +92,7 @@ const Signup: React.FC = () => {
                 <Grid item xs={12} md={6}>
                   <form onSubmit={handleSignup}>
                     <Grid justifyContent="center" display="flex">
-                      <Typography variant="h5" gutterBottom>
-                        Membership Application
-                      </Typography>
+                     
                     </Grid>
                     <Typography variant="body1">
                       Enter your details below
@@ -163,18 +166,37 @@ const Signup: React.FC = () => {
                       type="submit"
                       variant="contained"
                       color="primary"
-                      sx={{ bgcolor: 'red' }}
+                      sx={{ bgcolor: 'red',
+                        display:'block',
+                        float:'right',
+                        '&:hover': {
+                            backgroundColor: 'darkred',
+                          }
+                       }}
                     >
                       Sign Up
                     </Button>
-                    <Typography variant="body1">
+                    <Typography variant="body1" sx={{marginTop:'15%'}}>
                       Already have an account?{' '}
                       <Link
                         component="button"
                         onClick={() => router.push('/auth/login')}
-                        sx={{ color: 'red' }}
+                        sx={{ float:'right'}}
                       >
+                        <Button 
+                         variant="contained"
+                         color="primary"
+                         sx={{ bgcolor: 'red',
+                          display:'block',
+                          float:'right',
+                          '&:hover': {
+                              backgroundColor: 'darkred',
+                            }
+                         }}
+                        >
                         Log In
+                        </Button>
+                        
                       </Link>
                     </Typography>
                     {message && (
@@ -189,6 +211,7 @@ const Signup: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
+    </div>
     </div>
   );
 }

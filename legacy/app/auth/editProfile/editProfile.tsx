@@ -17,8 +17,8 @@ const EditProfile: React.FC = () => {
   const [message, setMessage] = useState('');
   const { user, updateUser } = useProfile();
   const router = useRouter();
-  const role =localStorage.getItem('role')
-  console.log(role);
+  const role =localStorage.getItem('role')||''
+
   
   useEffect(() => {
     if (user) {
@@ -108,7 +108,7 @@ const EditProfile: React.FC = () => {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                    {role === "Client" &&
+                    {role === "client" &&
                       <TextField
                         fullWidth
                         label="Address"
@@ -159,16 +159,26 @@ const EditProfile: React.FC = () => {
                     <Grid item xs={12} display="flex" justifyContent="flex-end">
                       <Button
                         variant="contained"
-                        color="primary"
                         type="submit"
-                        sx={{ marginRight: 2 }}
+                        sx={{ marginRight: 2 ,backgroundColor:"black",
+                          '&:hover': {
+                            backgroundColor: 'white',
+                            color: 'black',
+                          },
+                        }}
                       >
                         Save Changes
                       </Button>
                       <Button
-                        variant="outlined"
-                        color="secondary"
-                        onClick={() => router.push('/profile')}
+                        variant="contained"
+                        onClick={() => router.push('/auth/profile')}
+                        sx={{ marginRight: 2 ,backgroundColor:"red",
+                          '&:hover': {
+                            backgroundColor: 'darkred',
+                            
+                          },
+                        }}
+
                       >
                         Cancel
                       </Button>

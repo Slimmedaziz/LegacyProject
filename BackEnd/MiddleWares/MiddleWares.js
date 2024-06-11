@@ -30,12 +30,7 @@ const protect = async (req, res,next) => {
     res.status(401).json({ error: 'Not authorized, token failed' });
   }
 };
-const checkAdminRole = (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ error: 'Access denied, admin only' });
-  }
-  next();
-};
+
 const validiSeller = (req, res, next) => {
   const { role, CIN } = req.body;
   if (role === 'Seller' && !CIN) {
@@ -47,7 +42,22 @@ const handleErrors = (res, error) => {
   console.error('Error :',error);
   res.status(500).json({ error: error.message });
 };
+const checkAdminRole = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1]; 
+  if (!token) {
+    return res.status(403).json({ error: 'No token provided' });
+  }
 
+  try {
+    const decoded = jwt.verify(token, 'eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE3OTYzNzUzLCJleHAiOjE3MjU3Mzk3NTN9');
+    if (decoded.role !== 'admin') {
+      return res.status(403).json({ error: 'Access denied, admin only' });
+    }
+    next();
+  } catch (err) {
+    return res.status(403).json({ error: 'Invalid token' });
+  }
+};
 // const forgotPassWord = async()=>{
 // //1- getting the user email based on the post
 // const user = await db.User.findOne({email:req.body.email})

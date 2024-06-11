@@ -60,7 +60,7 @@ const AddProduct: React.FC<Props> = ({ open,setopen }) => {
                     confirmButton: 'swal-confirm-button',
                 }
             }).then(() => {
-                router.push('/profile');
+                router.push('/shop');
             });
 
         } catch (error) {

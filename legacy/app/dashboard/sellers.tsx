@@ -6,8 +6,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const styles = {
   header: {
     textAlign: 'center',
-    backgroundColor: '#0a0a0a',
-    color: '#ffffff',
+  
+    color: 'black',
     padding: '10px',
     borderRadius: '8px',
     marginBottom: '20px',
@@ -19,22 +19,18 @@ const styles = {
     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
   },
   tableHeadRow: {
-    backgroundColor: '#f44336',
+    backgroundColor: 'black',
   },
   tableHeadCell: {
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
-  },
-  tableBodyRow: {
-    '&:hover': {
-      backgroundColor: '#f1f1f1',
-    },
-  },
+  }
+,
   deleteButton: {
-    color: '#d32f2f',
+    color: 'red',
   },
   switchButton: {
-    color: '#d32f2f',
+    color: 'black',
     backgroundColor: 'transparent',
     '&:hover': {
       backgroundColor: 'transparent',
@@ -86,9 +82,7 @@ const Sellers:React.FC = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <Typography variant="h3" gutterBottom sx={styles.header}>
-        Sellers
-      </Typography>
+      
       <Paper style={styles.paper}>
         <Table>
           <TableHead>
@@ -102,7 +96,7 @@ const Sellers:React.FC = () => {
           </TableHead>
           <TableBody>
             {sellers.map(seller => (
-              <TableRow key={seller.id} sx={styles.tableBodyRow}>
+              <TableRow key={seller.id} >
                 <TableCell>{seller.id}</TableCell>
                 <TableCell>{seller.userName}</TableCell>
                 <TableCell>{seller.email}</TableCell>

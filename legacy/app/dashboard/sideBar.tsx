@@ -1,72 +1,56 @@
-"use client";
+'use client';
 
-import React from "react";
-import { List, ListItem, Button, Box } from "@mui/material";
-
-import { useRouter } from "next/navigation";
-
+import React from 'react';
+import { AppBar, Toolbar, Button, Box, Divider, Typography } from '@mui/material';
 
 interface SideBarProps {
-  onProductsClick: () => void;
   onClientsClick: () => void;
   onSellersClick: () => void;
+  onProductsClick: () => void;
   onOrdersClick: () => void;
-  onLogout: () => void;
+  onChartsClick: () => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ onProductsClick, onClientsClick, onSellersClick, onOrdersClick, onLogout }) => {
-  const router = useRouter();
-
-  const buttonStyle = {
-    marginBottom: "20px",
-    backgroundColor: "red",
-    width: "100%",
-    color: "black",
-    fontWeight: "bold",
-    textTransform: "none",
-    borderRadius: "8px",
-    '&:hover': {
-      backgroundColor: "#f5f5f5",
-    },
-  };
-
-  const logOut = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    router.push('/auth/login');
-  };
-
+const SideBar: React.FC<SideBarProps> = ({
+  onClientsClick,
+  onSellersClick,
+  onProductsClick,
+  onOrdersClick,
+  onChartsClick,
+}) => {
   return (
-    <Box sx={{ padding: "20px", backgroundColor: "#f5f5f5", height: "100vh", boxShadow: "2px 0px 5px rgba(0, 0, 0, 0.1)" }}>
-      <List style={{ marginTop: "20px", color: "black" }}>
-        <ListItem>
-          <Button variant="contained" sx={buttonStyle} onClick={onProductsClick}>
-            Products
+    <AppBar position="fixed" sx={{ backgroundColor: 'white', color: 'black', width: '100%' }}>
+      
+      <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Typography>
+      <Button color="inherit"sx={{ display: 'flex', justifyContent: 'flex-start',mr:25 }}>
+            <b> Exclusive Dashboard </b>
           </Button>
-        </ListItem>
-        <ListItem>
-          <Button variant="contained" sx={buttonStyle} onClick={onClientsClick}>
+       
+      </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Button color="inherit" onClick={onClientsClick}>
             Clients
           </Button>
-        </ListItem>
-        <ListItem>
-          <Button variant="contained" sx={buttonStyle} onClick={onSellersClick}>
+          <Divider orientation="vertical" flexItem />
+          <Button color="inherit" onClick={onSellersClick}>
             Sellers
           </Button>
-        </ListItem>
-        <ListItem>
-          <Button variant="contained" sx={buttonStyle} onClick={onOrdersClick}>
+          <Divider orientation="vertical" flexItem />
+          <Button color="inherit" onClick={onProductsClick}>
+            Products
+          </Button>
+          <Divider orientation="vertical" flexItem />
+          <Button color="inherit" onClick={onOrdersClick}>
             Orders
           </Button>
-        </ListItem>
-        <ListItem>
-          <Button variant="contained" color="secondary" onClick={logOut} sx={buttonStyle}>
-            Logout
+          <Divider orientation="vertical" flexItem />
+          <Button color="inherit" onClick={onChartsClick}>
+            Statistics
           </Button>
-        </ListItem>
-      </List>
-    </Box>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 

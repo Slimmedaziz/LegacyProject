@@ -23,7 +23,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import Navbar from '../Navbar';
-
+import '../globals.css'
 interface Item {
   id: number;
   name: string;
@@ -114,7 +114,7 @@ const Cart: React.FC = () => {
         const decoded: any = jwtDecode(token);
         const userId = decoded.id;
         const productsArray = items.map((item) => [item.id, item.quantity]);
-
+  
         const response = await axios.post('http://localhost:5000/Client/order', {
           products: JSON.stringify(productsArray),
           totalAmount: TotalPrice(),
@@ -123,13 +123,35 @@ const Cart: React.FC = () => {
           userId: userId,
           date: new Date(),
         });
-
+  
         if (response.data.success) {
           Swal.fire('Order Placed', 'Your order has been placed successfully', 'success');
           emptyCart();
         } else {
           Swal.fire('Error', 'Failed to place order', 'error');
         }
+      } else {
+      
+        Swal.fire({
+          icon: 'error',
+          title: 'Not Logged In',
+          text: 'You are not logged in. Please sign up or log in.',
+          showCancelButton: true,
+          confirmButtonText: 'Sign Up',
+          cancelButtonText: 'Log In',
+          reverseButtons: true,
+          
+          confirmButtonColor: 'darkred',
+          cancelButtonColor: 'darkred',
+        }).then((result) => {
+          if (result.isConfirmed) {
+          
+            router.push('/auth/signUp');
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            
+            router.push('/auth/login');
+          }
+        });
       }
     } catch (error) {
       console.error('Error placing order:', error);
@@ -140,6 +162,7 @@ const Cart: React.FC = () => {
   const coupon = () => {
     if (couponCode === 'EXCLUSIVE2024') {
       setDiscount(0.2);
+      Swal.fire("coupon applied","20% reduction applied",'success')
     } else {
       setDiscount(0);
       Swal.fire('Invalid Coupon', 'The coupon code you entered is not valid.', 'error');
@@ -276,7 +299,7 @@ const Cart: React.FC = () => {
                 <b>Total: ${TotalPrice().toFixed(2)}</b>
               </Typography>
               <Box display="flex" justifyContent="flex-end">
-                <Button variant="contained" color="primary" onClick={proceedToBuy} sx={{ mt: 2, backgroundColor: 'red' }}>
+                <Button variant="contained" color="primary" onClick={()=>proceedToBuy()} sx={{ mt: 2, backgroundColor: 'red' }}>
                   Proceed to Checkout
                 </Button>
               </Box>

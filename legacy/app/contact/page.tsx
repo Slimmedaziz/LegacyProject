@@ -8,9 +8,10 @@ function Contact(): JSX.Element {
   return (
     <div className="App">
       <Navbar />
+      <div style={{backgroundColor:'darkred',paddingBottom:'1%',paddingTop:'1%'}}>
       <Box sx={{ width: "90%", margin: "0 auto" ,marginBottom:"50px"}}>
-        <Typography variant="h4" sx={{ mb: 2 ,marginTop:"60px" }}>
-          Contact
+        <Typography variant="h4" sx={{ mb: 2 ,marginTop:"60px" ,color:"white"}}>
+        <b>  Contact </b>
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
@@ -104,6 +105,7 @@ function Contact(): JSX.Element {
           </Grid>
         </Grid>
       </Box>
+      </div>
     </div>
   );
 }

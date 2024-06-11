@@ -46,14 +46,16 @@ function Login() {
       if (error.response && error.response.status === 404) {
         setMessage('User not found. Please check your username.');
       } else {
-        setMessage('Log in failed. Please try again later.');
+        setMessage(`Log in failed.wrong password  `);
       }
     }
   };
 
   return (
     <div>
-      <Navbar />
+    <Navbar />
+    <div style={{backgroundColor:'darkred',paddingBottom:'11%',paddingTop:'11%'}}>
+      
       <Box mt={4}>
         <Grid container justifyContent="center">
           <Grid item xs={12} md={9}>
@@ -118,14 +120,25 @@ function Login() {
                     >
                       Login
                     </Button>
-                    <Typography variant="body1">
+                    <Typography variant="body1" sx={{mt:2}}>
                       Don't have an account?{' '}
                       <Link
                         component="button"
-                        onClick={() => router.push('/signup')}
-                        sx={{ color: '#ff0000' }}
-                      >
+                        onClick={() => router.push('/auth/signUp')}
+                        sx={{ color: '#ff0000' ,float:'right'}}
+                      ><Button 
+                      variant="contained"
+                      color="primary"
+                      sx={{ bgcolor: 'red',
+                       display:'block',
+                       float:'right',
+                       '&:hover': {
+                           backgroundColor: 'darkred',
+                         }
+                      }}
+                     >
                         Sign Up
+                        </Button>
                       </Link>
                     </Typography>
                     {message && (
@@ -140,6 +153,7 @@ function Login() {
           </Grid>
         </Grid>
       </Box>
+    </div>
     </div>
   );
 }
